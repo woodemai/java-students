@@ -1,0 +1,11 @@
+/Users/redcollar/projects/java-students/src/main/java/ru/vsu/cs/nsavchenko/App.java
+/Users/redcollar/projects/java-students/src/main/java/ru/vsu/cs/nsavchenko/dao/GroupDAO.java
+/Users/redcollar/projects/java-students/src/main/java/ru/vsu/cs/nsavchenko/dao/StudentDAO.java
+/Users/redcollar/projects/java-students/src/main/java/ru/vsu/cs/nsavchenko/dao/TaskDAO.java
+/Users/redcollar/projects/java-students/src/main/java/ru/vsu/cs/nsavchenko/db/DatabaseConnection.java
+/Users/redcollar/projects/java-students/src/main/java/ru/vsu/cs/nsavchenko/model/Group.java
+/Users/redcollar/projects/java-students/src/main/java/ru/vsu/cs/nsavchenko/model/Student.java
+/Users/redcollar/projects/java-students/src/main/java/ru/vsu/cs/nsavchenko/model/Task.java
+/Users/redcollar/projects/java-students/src/main/java/ru/vsu/cs/nsavchenko/servlet/GroupServlet.java
+/Users/redcollar/projects/java-students/src/main/java/ru/vsu/cs/nsavchenko/servlet/StudentServlet.java
+/Users/redcollar/projects/java-students/src/main/java/ru/vsu/cs/nsavchenko/servlet/TaskServlet.java

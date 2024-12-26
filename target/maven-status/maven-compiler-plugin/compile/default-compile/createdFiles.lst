@@ -1,0 +1,11 @@
+ru/vsu/cs/nsavchenko/dao/TaskDAO.class
+ru/vsu/cs/nsavchenko/App.class
+ru/vsu/cs/nsavchenko/servlet/GroupServlet.class
+ru/vsu/cs/nsavchenko/model/Task.class
+ru/vsu/cs/nsavchenko/model/Student.class
+ru/vsu/cs/nsavchenko/db/DatabaseConnection.class
+ru/vsu/cs/nsavchenko/servlet/StudentServlet.class
+ru/vsu/cs/nsavchenko/dao/StudentDAO.class
+ru/vsu/cs/nsavchenko/dao/GroupDAO.class
+ru/vsu/cs/nsavchenko/servlet/TaskServlet.class
+ru/vsu/cs/nsavchenko/model/Group.class
