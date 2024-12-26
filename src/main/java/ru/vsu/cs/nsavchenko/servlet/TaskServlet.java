@@ -18,8 +18,8 @@ import ru.vsu.cs.nsavchenko.model.Task;
 
 @WebServlet("/tasks/*")
 public class TaskServlet extends HttpServlet {
-    private TaskDAO taskDAO = new TaskDAO();
-    private ObjectMapper mapper = new ObjectMapper();
+    private final TaskDAO taskDAO = new TaskDAO();
+    private final ObjectMapper mapper = new ObjectMapper();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
@@ -34,7 +34,7 @@ public class TaskServlet extends HttpServlet {
         }
 
         try {
-            List<Task> tasks = taskDAO.getTasksByStudentId(Long.parseLong(studentId));
+            List<Task> tasks = taskDAO.getTasksByStudentId(Long.valueOf(studentId));
             mapper.writeValue(response.getWriter(), tasks);
         } catch (SQLException e) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
@@ -51,7 +51,7 @@ public class TaskServlet extends HttpServlet {
         }
 
         try {
-            Long taskId = Long.parseLong(pathInfo.substring(1));
+            Long taskId = Long.valueOf(pathInfo.substring(1));
             JsonNode node = mapper.readTree(request.getReader());
             boolean completed = node.get("completed").asBoolean();
             

@@ -17,8 +17,8 @@ import ru.vsu.cs.nsavchenko.model.Student;
 
 @WebServlet("/students/*")
 public class StudentServlet extends HttpServlet {
-    private StudentDAO studentDAO = new StudentDAO();
-    private ObjectMapper mapper = new ObjectMapper();
+    private final StudentDAO studentDAO = new StudentDAO();
+    private final ObjectMapper mapper = new ObjectMapper();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
@@ -34,7 +34,7 @@ public class StudentServlet extends HttpServlet {
                 mapper.writeValue(response.getWriter(), students);
             } else {
                 // Получить конкретного студента по ID
-                Long studentId = Long.parseLong(pathInfo.substring(1));
+                Long studentId = Long.valueOf(pathInfo.substring(1));
                 Student student = studentDAO.getStudentById(studentId);
                 if (student != null) {
                     mapper.writeValue(response.getWriter(), student);
