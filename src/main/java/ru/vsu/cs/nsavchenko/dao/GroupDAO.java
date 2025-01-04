@@ -11,7 +11,7 @@ import ru.vsu.cs.nsavchenko.db.DatabaseConnection;
 import ru.vsu.cs.nsavchenko.model.Group;
 
 public class GroupDAO {
-    public List<Group> getAllGroups() throws SQLException {
+    public List<Group> getAllGroups() throws SQLException, ClassNotFoundException {
         List<Group> groups = new ArrayList<>();
         String sql = "SELECT * FROM groups";
         

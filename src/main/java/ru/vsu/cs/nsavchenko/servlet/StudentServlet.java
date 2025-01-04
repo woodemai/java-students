@@ -17,15 +17,16 @@ import ru.vsu.cs.nsavchenko.model.Student;
 
 @WebServlet("/students/*")
 public class StudentServlet extends HttpServlet {
+
     private final StudentDAO studentDAO = new StudentDAO();
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        
+
         try {
             String pathInfo = request.getPathInfo();
             if (pathInfo == null || pathInfo.equals("/")) {
@@ -42,20 +43,20 @@ public class StudentServlet extends HttpServlet {
                     response.sendError(HttpServletResponse.SC_NOT_FOUND);
                 }
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Student student = mapper.readValue(request.getReader(), Student.class);
         try {
             studentDAO.addStudent(student);
             response.setStatus(HttpServletResponse.SC_CREATED);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
-} 
+}

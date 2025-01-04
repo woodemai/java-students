@@ -18,15 +18,16 @@ import ru.vsu.cs.nsavchenko.model.Task;
 
 @WebServlet("/tasks/*")
 public class TaskServlet extends HttpServlet {
+
     private final TaskDAO taskDAO = new TaskDAO();
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        
+
         String studentId = request.getParameter("studentId");
         if (studentId == null) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Student ID is required");
@@ -36,13 +37,13 @@ public class TaskServlet extends HttpServlet {
         try {
             List<Task> tasks = taskDAO.getTasksByStudentId(Long.valueOf(studentId));
             mapper.writeValue(response.getWriter(), tasks);
-        } catch (SQLException e) {
+        } catch (SQLException | NumberFormatException | ClassNotFoundException e) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
 
     @Override
-    protected void doPut(HttpServletRequest request, HttpServletResponse response) 
+    protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String pathInfo = request.getPathInfo();
         if (pathInfo == null) {
@@ -54,11 +55,11 @@ public class TaskServlet extends HttpServlet {
             Long taskId = Long.valueOf(pathInfo.substring(1));
             JsonNode node = mapper.readTree(request.getReader());
             boolean completed = node.get("completed").asBoolean();
-            
+
             taskDAO.updateTaskStatus(taskId, completed);
             response.setStatus(HttpServletResponse.SC_OK);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
-} 
+}

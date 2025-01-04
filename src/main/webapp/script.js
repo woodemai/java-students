@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function loadGroups() {
-    fetch('/groups')
+    fetch('/student-tasks/groups')
         .then(response => response.json())
         .then(groups => {
             const select = document.getElementById('groupSelect');
@@ -23,7 +23,7 @@ function loadGroups() {
 }
 
 function loadStudentsByGroup(groupId) {
-    fetch(`/students?groupId=${groupId}`)
+    fetch(`/student-tasks/students?groupId=${groupId}`)
         .then(response => response.json())
         .then(students => {
             const studentsList = document.getElementById('studentsList');
@@ -39,7 +39,7 @@ function loadStudentsByGroup(groupId) {
 }
 
 function loadStudentTasks(studentId) {
-    fetch(`/tasks?studentId=${studentId}`)
+    fetch(`/student-tasks/tasks?studentId=${studentId}`)
         .then(response => response.json())
         .then(tasks => {
             const tasksList = document.getElementById('tasksList');
@@ -59,7 +59,7 @@ function loadStudentTasks(studentId) {
 }
 
 function updateTaskStatus(taskId, completed) {
-    fetch(`/tasks/${taskId}`, {
+    fetch(`/student-tasks/tasks/${taskId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

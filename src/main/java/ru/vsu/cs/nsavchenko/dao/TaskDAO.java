@@ -11,13 +11,13 @@ import ru.vsu.cs.nsavchenko.db.DatabaseConnection;
 import ru.vsu.cs.nsavchenko.model.Task;
 
 public class TaskDAO {
-    public List<Task> getTasksByStudentId(Long studentId) throws SQLException {
+
+    public List<Task> getTasksByStudentId(Long studentId) throws SQLException, ClassNotFoundException {
         List<Task> tasks = new ArrayList<>();
         String sql = "SELECT * FROM tasks WHERE student_id = ?";
-        
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            
+
+        try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
             stmt.setLong(1, studentId);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
@@ -33,14 +33,13 @@ public class TaskDAO {
         return tasks;
     }
 
-    public void updateTaskStatus(Long taskId, boolean completed) throws SQLException {
+    public void updateTaskStatus(Long taskId, boolean completed) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE tasks SET is_completed = ? WHERE id = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            
+        try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
             stmt.setBoolean(1, completed);
             stmt.setLong(2, taskId);
             stmt.executeUpdate();
         }
     }
-} 
+}
