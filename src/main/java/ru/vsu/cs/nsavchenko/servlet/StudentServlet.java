@@ -29,9 +29,9 @@ public class StudentServlet extends HttpServlet {
 
         try {
             String pathInfo = request.getPathInfo();
+            String groupId = request.getParameter("groupId");
             if (pathInfo == null || pathInfo.equals("/")) {
-                // Получить всех студентов
-                List<Student> students = studentDAO.getAllStudents();
+                List<Student> students = studentDAO.getAllStudents(Long.valueOf(groupId));
                 mapper.writeValue(response.getWriter(), students);
             } else {
                 // Получить конкретного студента по ID

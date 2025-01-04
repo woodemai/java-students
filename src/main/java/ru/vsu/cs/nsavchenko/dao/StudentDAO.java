@@ -12,20 +12,25 @@ import ru.vsu.cs.nsavchenko.model.Student;
 
 public class StudentDAO {
 
-    public List<Student> getAllStudents() throws SQLException, ClassNotFoundException {
+    public List<Student> getAllStudents(Long groupId) throws SQLException, ClassNotFoundException {
         List<Student> students = new ArrayList<>();
-        String sql = "SELECT * FROM students";
+        String sql = "SELECT * FROM students WHERE group_id = ?";
 
-        try (Connection conn = DatabaseConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
-
-            while (rs.next()) {
-                Student student = new Student();
-                student.setId(rs.getLong("id"));
-                student.setFirstName(rs.getString("first_name"));
-                student.setLastName(rs.getString("last_name"));
-                student.setGroupId(rs.getLong("group_id"));
-                students.add(student);
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement((sql));
+            stmt.setLong(1, groupId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Student student = new Student();
+                    student.setId(rs.getLong("id"));
+                    student.setFirstName(rs.getString("first_name"));
+                    student.setLastName(rs.getString("last_name"));
+                    student.setGroupId(rs.getLong("group_id"));
+                    students.add(student);
+                }
+            } catch (Exception e) {
             }
+
         }
         return students;
     }
@@ -59,4 +64,5 @@ public class StudentDAO {
             stmt.executeUpdate();
         }
     }
+
 }
